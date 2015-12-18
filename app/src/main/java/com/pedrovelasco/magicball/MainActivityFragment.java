@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.MediaPlayer;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,6 +95,8 @@ public class MainActivityFragment extends Fragment {
         text = (TextView) rootView.findViewById(R.id.textView);
 
         AlphaAnimation txta = new AlphaAnimation(0.0f, 1.0f);
+        MediaPlayer mp = MediaPlayer.create(this.getContext(), R.raw.effect);
+        mp.start();
 
         txta.setDuration(1500);
         //para que no se repita
