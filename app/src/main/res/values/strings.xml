@@ -5,7 +5,6 @@
 
 
     <string-array name="predictions">
-
         <item>En mi opinión, sí</item>
         <item> Es cierto</item>
         <item> Es decididamente así</item>
@@ -23,7 +22,7 @@
         <item> Mi respuesta es no</item>
         <item> Mis fuentes me dicen que no</item>
         <item> Muy dudoso</item>
-        <item> PESAOOO</item>
+        <item> Pesao</item>
         <item>Preguntale a quien le importe</item>
     </string-array>
 </resources>
