@@ -17,11 +17,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    /*
-    private ShakeDetector mShakeDetector;
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
-    */
+
 
     static Context context;
 
@@ -38,40 +34,12 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.container, new MainActivityFragment())
                     .commit();
         }
-        /*
-        mSensorManager = (SensorManager)  getSystemService(Context.SENSOR_SERVICE);
-        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
-            @Override
-            public void onShake() {
-                FragmentManager fm = getSupportFragmentManager();
 
-                //if you added fragment via layout xml
-                MainActivityFragment fragment
-                        = (MainActivityFragment)fm.findFragmentById(R.id.container);
-                fragment.predictionAction();
-                Log.d("mv","SAKET");
-            }
-        });
-
-        */
     }
 
 
 
-    /*
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
-    }
 
-    @Override
-    protected void onPause() {
-        mSensorManager.unregisterListener(mShakeDetector);
-        super.onPause();
-    }
-    */
 
 
 
