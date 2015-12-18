@@ -6,14 +6,19 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.os.*;
 
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -34,6 +39,8 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        animatedBallStart();
+
 
 
     return rootView;
@@ -56,6 +63,7 @@ public class MainActivityFragment extends Fragment {
         mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
             @Override
             public void onShake() {
+
             predictionAction();
             }
         });
@@ -84,10 +92,19 @@ public class MainActivityFragment extends Fragment {
     public void predictionAction() {
 
         text = (TextView) rootView.findViewById(R.id.textView);
-        bg = (ImageView) rootView.findViewById(R.id.imageView);
+
+        AlphaAnimation txta = new AlphaAnimation(0.0f, 1.0f);
+
+        txta.setDuration(1500);
+        //para que no se repita
+        txta.setFillAfter(true);
+
 
                 text.setText(MakePrediction.getPrediction(getContext()));
-                animatedball();
+               animatedBallShake();
+            text.setAnimation(txta);
+            text.startAnimation(txta);
+
 
 
     }
@@ -97,18 +114,56 @@ public class MainActivityFragment extends Fragment {
 
 
 
-    public void animatedball(){
+    public void animatedBallStart(){
+
+        bg = (ImageView) rootView.findViewById(R.id.imageView);
         bg.setBackgroundResource(R.drawable.ball_animation);
 
 
         AnimationDrawable frameAnimation = (AnimationDrawable) bg.getBackground();
-        if(frameAnimation.isRunning()){
-            frameAnimation.stop();
-        }
         frameAnimation.start();
     }
 
 
+
+    public void animatedBallShake(){
+
+        bg = (ImageView) rootView.findViewById(R.id.imageView);
+        bg.setBackgroundResource(R.drawable.ball_animation_shake);
+
+
+        final AnimationDrawable frameAnimation = (AnimationDrawable) bg.getBackground();
+        if(frameAnimation.isRunning()){
+           frameAnimation.stop();
+        }
+
+        frameAnimation.start();
+        checkIfAnimationDone(frameAnimation);
+
+
+
+
+    }
+
+
+
+    /*
+    Recursivo que no termina hasta que la animationdrawable que se le pase termine
+     */
+    private void checkIfAnimationDone(AnimationDrawable anim){
+        final AnimationDrawable a = anim;
+        int timeBetweenChecks = 300;
+        Handler h = new Handler();
+        h.postDelayed(new Runnable(){
+            public void run(){
+                if (a.getCurrent() != a.getFrame(a.getNumberOfFrames() - 1)){
+                    checkIfAnimationDone(a);
+                } else{
+                    animatedBallStart();
+                }
+            }
+        }, timeBetweenChecks);
+    };
 
 
 }

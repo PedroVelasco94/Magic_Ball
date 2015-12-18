@@ -23,6 +23,8 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:textAlignment="center"
-        android:textColor="#fff" />
+        android:textColor="#fff"
+        android:textSize="35dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
