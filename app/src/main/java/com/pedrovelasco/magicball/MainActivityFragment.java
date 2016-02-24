@@ -7,19 +7,14 @@ import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.os.*;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -54,7 +49,6 @@ public class MainActivityFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 
 
@@ -94,13 +88,18 @@ public class MainActivityFragment extends Fragment {
 
         text = (TextView) rootView.findViewById(R.id.textView);
 
+        //Animacion de textto de 0 de alpha a 1 de alpha
         AlphaAnimation txta = new AlphaAnimation(0.0f, 1.0f);
-        MediaPlayer mp = MediaPlayer.create(this.getContext(), R.raw.effect);
-        mp.start();
-
+        //duracion de un segundo y medio
         txta.setDuration(1500);
         //para que no se repita
         txta.setFillAfter(true);
+
+        //Sonido y empieze de este
+        MediaPlayer mp = MediaPlayer.create(this.getContext(), R.raw.effect);
+        mp.start();
+
+
 
 
                 text.setText(MakePrediction.getPrediction(getContext()));
@@ -166,7 +165,7 @@ public class MainActivityFragment extends Fragment {
                 }
             }
         }, timeBetweenChecks);
-    };
+    }
 
 
 }
